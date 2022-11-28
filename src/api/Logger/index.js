@@ -2,23 +2,18 @@ import config from '@/api/index';
 
 const Logger = {}
 
-Logger.getAll = async function(phrase) {
+Logger.getAll = async function(passphrase) {
   return new Promise((resolve, reject) => {
+    console.log(`${config.host}/logger`)
     fetch(`${config.host}/logger`, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Connection': 'keep-alive',
       },
-      body: { phrase }
+      body: JSON.stringify({ passphrase })
     })
-      .then(async res => {
-        if (res.ok) {
-          resolve(await res.json())
-        } else {
-          reject(false)
-        }
-      })
+      .then(res => resolve(res))
       .catch(err => reject(err))
   })
 }

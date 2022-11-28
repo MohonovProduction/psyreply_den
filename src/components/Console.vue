@@ -2,8 +2,11 @@
   <article class="wrapper">
     <h1 class="heading wrapper__heading">See, or check console</h1>
     <article v-for="log in data" class="console">
-      <h2 class="heading console__heading">id: {{log.id}}</h2>
-      <h3 class="heading">Name: {{log.name}}</h3>
+      <header class="console__header">
+        <h2 class="heading console__heading">id: {{log.id}}</h2>
+        <h3 class="heading">Name: {{log.name}}</h3>
+        <img :src="log.image" alt="cock" class="console__image">
+      </header>
       <p class="text">Message: {{log.message}}</p>
       <p class="text">Time: {{new Date(log.timestamp)}}</p>
       <div>
@@ -19,70 +22,8 @@ export default {
   props: {
     data: {
       type: Array,
-      default: [
-        {
-          "id": 1,
-          "name": "Error",
-          "message": "test",
-          "stack": [
-            "Error: test",
-            " UserController.get (/home/dudosyka/Documents/psyreply2.0_backend/src/modules/user/controllers/user.controller.ts:7:11)",
-            " /home/dudosyka/Documents/psyreply2.0_backend/node_modules/@nestjs/core/router/router-execution-context.js:38:29",
-            " InterceptorsConsumer.intercept (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/@nestjs/core/interceptors/interceptors-consumer.js:11:20)",
-            " /home/dudosyka/Documents/psyreply2.0_backend/node_modules/@nestjs/core/router/router-execution-context.js:46:60",
-            " /home/dudosyka/Documents/psyreply2.0_backend/node_modules/@nestjs/core/router/router-proxy.js:9:23",
-            " Layer.handle [as handle_request] (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/layer.js:95:5)",
-            " next (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/route.js:144:13)",
-            " Route",
-            "ch (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/route.js:114:3)",
-            " Layer.handle [as handle_request] (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/layer.js:95:5)",
-            " /home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/index.js:2"
-          ],
-          "timestamp": "2022-11-22T21:22:52.000Z"
-        },
-        {
-          "id": 3,
-          "name": "Error",
-          "message": "test",
-          "stack": [
-            "Error: test",
-            " UserController.get (/home/dudosyka/Documents/psyreply2.0_backend/src/modules/user/controllers/user.controller.ts:7:11)",
-            " /home/dudosyka/Documents/psyreply2.0_backend/node_modules/@nestjs/core/router/router-execution-context.js:38:29",
-            " InterceptorsConsumer.intercept (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/@nestjs/core/interceptors/interceptors-consumer.js:11:20)",
-            " /home/dudosyka/Documents/psyreply2.0_backend/node_modules/@nestjs/core/router/router-execution-context.js:46:60",
-            " /home/dudosyka/Documents/psyreply2.0_backend/node_modules/@nestjs/core/router/router-proxy.js:9:23",
-            " Layer.handle [as handle_request] (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/layer.js:95:5)",
-            " next (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/route.js:144:13)",
-            " Route",
-            "ch (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/route.js:114:3)",
-            " Layer.handle [as handle_request] (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/layer.js:95:5)",
-            " /home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/index.js:2"
-          ],
-          "timestamp": "2022-11-22T21:24:01.000Z"
-        },
-        {
-          "id": 4,
-          "name": "BadRequestException",
-          "message": "Expected property name or '}' in JSON at position 2",
-          "stack": [
-            "BadRequestException: Expected property name or '}' in ",
-            " position 2",
-            " RoutesResolver.mapExternalException (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/@nestjs/core/router/routes-resolver.js:100:24)",
-            " callback (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/@nestjs/core/router/routes-resolver.js:86:24)",
-            " /home/dudosyka/Documents/psyreply2.0_backend/node_modules/@nestjs/core/router/router-proxy.js:20:23",
-            " Layer.handle_error (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/layer.js:71:5)",
-            " trim_prefix (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/index.js:326:13)",
-            " /home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/index.js:286:9",
-            " Function.process_params (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/index.js:346:12)",
-            " next (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/index.js:280:10)",
-            " Layer.handle_error (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/layer.js:67:12)",
-            " trim_prefix (/home/dudosyka/Documents/psyreply2.0_backend/node_modules/express/lib/router/index.js:32"
-          ],
-          "timestamp": "2022-11-22T21:24:10.000Z"
-        }
-      ]
     }
-  }
+  },
 }
 </script>
 
@@ -95,10 +36,43 @@ export default {
 .wrapper__heading {
   margin-bottom: 1rem;
 }
+.heading {
+  white-space: nowrap;
+  align-self: start;
+}
 .console {
   padding: 2rem;
   display: grid;
-  grid-gap: 1rem;
+  grid-gap: 1.5rem;
   background: hsl(0, 0%, 0%);
+}
+.console:hover {
+  cursor: alias;
+}
+.console__header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 200px;
+  justify-content: start;
+  align-items: center;
+  grid-gap: 1rem;
+}
+.console__heading {
+  align-self: end;
+}
+.console__image {
+  position: relative;
+  grid-column: 1;
+  grid-row: span 2 / 1;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  transition: all .5s ease-out;
+  cursor: zoom-out;
+}
+.console__image:hover {
+  cursor:
+    url("https://free-png.ru/wp-content/uploads/2021/03/Design-Hand-Isometric-Pixel-Art-6169b23e.png"), grabbing;
+  transform: scale(3) translate(50%, 25%);
 }
 </style>

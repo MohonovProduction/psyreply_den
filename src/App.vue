@@ -1,13 +1,14 @@
 <template>
   <div class="wrapper">
     <auth v-if="needAuth" @submit="getData" />
-    <console v-else />
+    <console :data="data" v-else />
   </div>
 </template>
 
 <script>
 import Auth from '@/components/Auth';
 import Console from '@/components/Console'
+import Logger from '@/api/Logger/index';
 
 export default {
   name: 'App',
@@ -23,7 +24,13 @@ export default {
   methods: {
     getData(n) {
       console.log(n)
-      this.needAuth = false
+      Logger.getAll(n)
+        .then(res => {
+          localStorage.setItem('passphrase', n)
+          res.json().then(r => this.data = r)
+          this.needAuth = false
+        })
+        .catch(err => console.log(err))
     }
   }
 }

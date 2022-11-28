@@ -2,6 +2,6 @@ const config = {}
 
 // Den have only dev config
 
-config.host = ''
+config.host = 'https://api.psyreply.com'
 
 export default config
